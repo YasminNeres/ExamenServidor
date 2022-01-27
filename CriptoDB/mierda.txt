@@ -1,0 +1,20 @@
+var list1 = from m in db.Moneda
+                where m.Actual >50
+                select m;
+
+
+
+
+                [HttpGet("/query1/")]
+        public async Task<ActionResult> Query1()
+        {
+            var list=db.Moneda.Where(m => m.Actual >= 50).OrderBy(m => m.MonedaId);
+
+            return Ok(new
+            {
+                ValorActual = "Parámetros para usar cuando sea posible",
+                Descripcion = "Monedas con valor actual superior a 50€ ordenadas alfabéticamente",
+                Valores = list,
+            });
+
+        }
